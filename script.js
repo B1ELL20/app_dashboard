@@ -1,13 +1,15 @@
 $(document).ready(() => {
 	$('#documentacao').on('click', () => {
-        $('#pagina').load('documentacao.html')
+        $.get('documentacao.html', data => {
+            $('#pagina').html(data)
+        })
     })
-
+/*
     $('#suporte').on('click', () => {
         $('#pagina').load('suporte.html')
     })
 
-    $('#feedback').on('click', () => {
+    $('#feedback').on('click', ()=> {
         $('#pagina').load('feedback.html')
         $.ajax( {
             type:'GET',
@@ -15,9 +17,9 @@ $(document).ready(() => {
             data: 'competencia=2018-10',
             dataType: 'json',
             success: dados => {
-                $('#totalElogios').html(dados.total_elogios)
-                $('#totalSugestoes').html(dados.total_sugestoes)
-                $('#totalReclamacoes').html(dados.total_reclamacoes)
+                $('#totalElogios').append(dados.total_elogios)
+                $('#totalSugestoes').append(dados.total_sugestoes)
+                $('#totalReclamacoes').append(dados.total_reclamacoes)
                 dados.dados_reclamacoes.forEach(element => {
                     $('#detalhesR ul').append(`<li class="list-group-item">
                         <h5>${element.email}</h5>
@@ -36,7 +38,6 @@ $(document).ready(() => {
                         <p>${element.contato}</p>
                     </li>`)
                 });
-                console.log(dados.dados_reclamacoes[0])
                },
            error: erro => { console.log(erro)}
         })
@@ -83,5 +84,5 @@ $(document).ready(() => {
                 },
             error: erro => { console.log(erro)}
         })
-    })
+    })*/
 })
