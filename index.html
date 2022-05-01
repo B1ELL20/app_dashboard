@@ -23,9 +23,9 @@
 	<body>
 
 		<!-- menu -->
-		<div class="nav-side-menu">
+		<div class="nav-side-menu bg-dark">
 		    <div class="brand">
-				DASHBOARD
+				<h4 class="p-3 mb-0">DASHBOARD</h4>
 			</div>
 		    <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
 		  
@@ -33,20 +33,20 @@
 		  
 		            <ul id="menu-content" class="menu-content collapse out">
 		                <li>
-		                  <a href='index.html'><i class="fa fa-tachometer-alt sidebar-icon"></i> Dashboard</a>
+		                  <a href='index.html'><i class="mr-4 fa fa-tachometer-alt sidebar-icon"></i> Home</a>
 		                </li>
 		                
 						<li>
-							<a href='#' id="feedback"><i class=""></i>Feedback<a>
+							<a href='#' id="feedback"><i class="fa-solid h4 fa-comment-dots mr-4"></i>Feedback<a>
 						</li>
 						<li>
-							<a href='#' id="clientes"><i class=""></i>Clientes<a>
+							<a href='#' id="clientes"><i class="h4 mr-4 fa-solid fa-people-group"></i>Clientes<a>
 						</li>
 						<li>
-							<a href='#' id="conta"><i class=""></i>Conta<a>
+							<a href='#' id="conta"><i class="h4 mr-4 fa-regular fa-circle-user"></i>Conta<a>
 						</li>
 						<li  data-toggle="collapse" data-target="#ajuda" class="collapsed">
-		                    <a href="#"><i class="fa fa-life-ring sidebar-icon"></i> Ajuda <span class="arrow"><i class="fa fa-angle-down"></i></spam></a>
+		                    <a href="#"><i class="fa fa-life-ring sidebar-icon mr-3"></i> Ajuda <span class="arrow"><i class="fa fa-angle-down"></i></spam></a>
 		                </li>
 						<ul class="sub-menu collapse" id="ajuda">
 		                    <li><a href="#" id="documentacao"><i class="fa fa-angle-right"></i> Documentação</a></li>
@@ -84,41 +84,46 @@
 		    	</div>
 		    	
 		    	<div class="row mb-3">
-		    		<div class="col-md-4">
+		    		<div class="col-md-2">
 		    			<div class="card">
 							<div class="card-header bg-primary">
-								Número de vendas
+								<h3>N° de vendas</h3>
 							</div>
 							<div class="card-body">
-								<i class="fa-solid fa-brazilian-real-sign mr-3"></i>
-								<h5 class="d-inline card-title" id="numeroVendas"></h5>
-								<hr>
-								<div>
-									<canvas id="myChart"></canvas>
-								</div>
+								<i class="fa-solid h4 fa-sack-dollar"></i>
+								<h5 class="d-inline card-title" >Total: </h5>
+								<h5 class="d-inline" id="numeroVendas"></h5>
 							</div>
 						</div>
 					</div>
 
-					<div class="col-md-4">
+					<div class="col-md-5">
 		    			<div class="card">
 							<div class="card-header bg-success">
-								Total de vendas
+								<h1>Total de vendas</h1>
 							</div>
 							<div class="card-body">
-								<i class="fa-solid fa-brazilian-real-sign mr-3"></i>
+								<i class="fa-solid h5 fa-brazilian-real-sign mr-3"></i>
 								<h5 class="d-inline card-title" id="totalVendas"></h5>
+								<hr>
+								<div>
+									<canvas id="ChartTotal"></canvas>
+								</div>
 							</div>
 						</div>
 		    		</div>
-					<div class="col-md-4">
+					<div class="col-md-5">
 		    			<div class="card">
 							<div class="card-header bg-danger">
-								Total de despesas
+								<h1>Total de despesas</h1>
 							</div>
 							<div class="card-body">
-								<i class="fa-solid fa-brazilian-real-sign mr-3"></i>
+								<i class="fa-solid h5 fa-brazilian-real-sign mr-3"></i>
 								<h5 class="d-inline card-title" id="totalDespesas"></h5>
+								<hr>
+								<div>
+									<canvas id="ChartDespesas"></canvas>
+								</div>
 							</div>
 						</div>
 					</div>

@@ -20,6 +20,7 @@ class Dashboard {
     public $dados_elogios;
     public $dados_sugestoes;
     public $individual_vendas;
+    public $individual_despesas;
 
     public function __get($name) {
         return $this->$name;
@@ -276,6 +277,23 @@ class Bd {
 
         return $stmt->fetch(PDO::FETCH_OBJ)->total_despesas;
     }
+
+    public function getIndividualDespesas() {
+        $query = '
+            select
+                data_despesa, total
+            from
+                tb_despesas
+            where
+                data_despesa between :data_inicio and :data_fim';
+
+        $stmt = $this->conexao->prepare($query);
+        $stmt->bindValue(':data_inicio', $this->dashboard->__get('data_inicio'));
+        $stmt->bindValue(':data_fim', $this->dashboard->__get('data_fim'));
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
 }
 
 
@@ -321,6 +339,7 @@ $dashboard->__set('dados_reclamacoes', $bd->getUserReclamacoes());
 $dashboard->__set('dados_elogios', $bd->getUserElogios());
 $dashboard->__set('dados_sugestoes', $bd->getUserSugestoes());
 $dashboard->__set('individual_vendas', $bd->getIndividualVendas());
+$dashboard->__set('individual_despesas', $bd->getIndividualDespesas());
 
 echo json_encode($dashboard);
 

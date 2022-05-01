@@ -68,25 +68,51 @@ $(document).ready(() => {
         $('#pagina').load('conta.html')
     })
 
-    let totais = []
-    let datas = []  
+    let totais1 = []
+    let datas1 = []
+    let totais2 = []
+    let datas2 = []   
 
-    var ctx = document.getElementById('myChart').getContext('2d');
+    var ctx1 = document.getElementById('ChartTotal').getContext('2d');
 
-    var chartGraph = new Chart(ctx, {
+    var chartGraph1 = new Chart(ctx1, {
         type: 'line',
         data: {
             labels: ['1', '2', '3', '4', '5'],
             datasets: [{
                 label: 'Numero de vendas',
                 data: [],
-                pointBackgroundColor: "blue",
+                pointBackgroundColor: "green",
                 pointBorderColor: "#FFF",
                 pointBorderWidth: 2,
                 pointHoverRadius: 4,
                 pointHoverBorderWidth: 1,
                 pointRadius: 4,
-                backgroundColor: "blue"
+                backgroundColor: "green",
+                borderColor: "green",
+                fill : false,
+            }]
+        }
+    });
+
+    var ctx2 = document.getElementById('ChartDespesas').getContext('2d');
+
+    var chartGraph2 = new Chart(ctx2, {
+        type: 'line',
+        data: {
+            labels: ['1', '2', '3', '4', '5'],
+            datasets: [{
+                label: 'Numero de vendas',
+                data: [],
+                pointBackgroundColor: "red",
+                pointBorderColor: "#FFF",
+                pointBorderWidth: 2,
+                pointHoverRadius: 4,
+                pointHoverBorderWidth: 1,
+                pointRadius: 4,
+                backgroundColor: "red",
+                borderColor: "red",
+                fill : false,
             }]
         }
     });
@@ -96,6 +122,8 @@ $(document).ready(() => {
         let competencia = $(e.target).val()
         let lista1 = []
         let lista2 = []
+        let lista3 = []
+        let lista4 = []
 
         $.ajax({
             type: 'GET',
@@ -103,22 +131,32 @@ $(document).ready(() => {
             data: `competencia=${competencia}`,
             dataType: 'json',
             success: dados => {
-                console.log(dados.individual_vendas)
                 dados.individual_vendas.forEach(element => {
                     lista2.push(element.total)
-                    let separador = element.data_venda
-                    let separado = separador.split('-')
-                    lista1.push(separado[2])
+                    let separador1 = element.data_venda
+                    let separado1 = separador1.split('-')
+                    lista1.push(separado1[2])
                 });
-                totais = lista2
-                datas = lista1
-                chartGraph.data.datasets[0].data = totais
-                chartGraph.data.labels = datas
-                chartGraph.update()
 
+                totais1 = lista2
+                datas1 = lista1
+                chartGraph1.data.datasets[0].data = totais1
+                chartGraph1.data.labels = datas1
+                chartGraph1.update()
+
+                dados.individual_despesas.forEach(element => {
+                    lista4.push(element.total)
+                    let separador2 = element.data_despesa
+                    let separado2 = separador2.split('-')
+                    lista3.push(separado2[2])
+                });
+
+                totais2 = lista4
+                datas2 = lista3
+                chartGraph2.data.datasets[0].data = totais2
+                chartGraph2.data.labels = datas2
+                chartGraph2.update()
                 
-                console.log(datas)
-                console.log(totais)
                  $('#numeroVendas').html(dados.numero_vendas)
                  $('#totalVendas').html(dados.total_vendas)
                  $('#totalDespesas').html(dados.total_despesas)
