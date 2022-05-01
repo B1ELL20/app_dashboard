@@ -4,7 +4,7 @@ $(document).ready(() => {
             $('#pagina').html(data)
         })
     })
-/*
+
     $('#suporte').on('click', () => {
         $('#pagina').load('suporte.html')
     })
@@ -38,7 +38,7 @@ $(document).ready(() => {
                         <p>${element.contato}</p>
                     </li>`)
                 });
-               },
+            },
            error: erro => { console.log(erro)}
         })
     })
@@ -68,9 +68,34 @@ $(document).ready(() => {
         $('#pagina').load('conta.html')
     })
 
+    let totais = []
+    let datas = []  
+
+    var ctx = document.getElementById('myChart').getContext('2d');
+
+    var chartGraph = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['1', '2', '3', '4', '5'],
+            datasets: [{
+                label: 'Numero de vendas',
+                data: [],
+                pointBackgroundColor: "blue",
+                pointBorderColor: "#FFF",
+                pointBorderWidth: 2,
+                pointHoverRadius: 4,
+                pointHoverBorderWidth: 1,
+                pointRadius: 4,
+                backgroundColor: "blue"
+            }]
+        }
+    });
+
     $('#competencia').on('change', e => {
         
         let competencia = $(e.target).val()
+        let lista1 = []
+        let lista2 = []
 
         $.ajax({
             type: 'GET',
@@ -78,11 +103,32 @@ $(document).ready(() => {
             data: `competencia=${competencia}`,
             dataType: 'json',
             success: dados => {
+                console.log(dados.individual_vendas)
+                dados.individual_vendas.forEach(element => {
+                    lista2.push(element.total)
+                    let separador = element.data_venda
+                    let separado = separador.split('-')
+                    lista1.push(separado[2])
+                });
+                totais = lista2
+                datas = lista1
+                chartGraph.data.datasets[0].data = totais
+                chartGraph.data.labels = datas
+                chartGraph.update()
+
+                
+                console.log(datas)
+                console.log(totais)
                  $('#numeroVendas').html(dados.numero_vendas)
                  $('#totalVendas').html(dados.total_vendas)
                  $('#totalDespesas').html(dados.total_despesas)
                 },
             error: erro => { console.log(erro)}
         })
-    })*/
+    })
+
 })
+
+
+
+

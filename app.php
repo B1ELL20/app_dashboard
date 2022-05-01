@@ -19,6 +19,7 @@ class Dashboard {
     public $dados_reclamacoes;
     public $dados_elogios;
     public $dados_sugestoes;
+    public $individual_vendas;
 
     public function __get($name) {
         return $this->$name;
@@ -90,6 +91,23 @@ class Bd {
         $stmt->execute();
 
         return $stmt->fetch(PDO::FETCH_OBJ)->total_vendas;
+    }
+
+    public function getIndividualVendas() {
+        $query = '
+            select
+                data_venda, total
+            from
+                tb_vendas
+            where
+                data_venda between :data_inicio and :data_fim';
+
+        $stmt = $this->conexao->prepare($query);
+        $stmt->bindValue(':data_inicio', $this->dashboard->__get('data_inicio'));
+        $stmt->bindValue(':data_fim', $this->dashboard->__get('data_fim'));
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
     public function getClienteAtivo() {
@@ -267,16 +285,22 @@ $conexao = new Conexao();
 
 $competencia = explode('-', $_GET['competencia']);
 
-if($_GET['competencia'] == '2018-08') {
-    $data_inicio = '2018-08-01';
-    $data_fim = '2018-08-31';
-} else if ($_GET['competencia'] == '2018-09') {
-    $data_inicio = '2018-09-01';
-    $data_fim = '2018-09-31';
-} else if ($_GET['competencia'] == '2018-10') {
-    $data_inicio = '2018-10-01';
-    $data_fim = '2018-10-31';
-}
+if ($competencia[1] == '04' || $competencia[1] == '06' || $competencia[1] == '09' || $competencia[1] == '11') {
+    if ($competencia[1] == '09') {
+        $data_inicio = '2018-09-01';
+        $data_fim = '2018-09-30';
+    }
+} else if ($competencia[1] == '01' || $competencia[1] == '03' || $competencia[1] == '05' || $competencia[1] == '07'
+ || $competencia[1] == '08' || $competencia[1] == '10' || $competencia[1] == '12') {
+    if($competencia[1] == '08') {
+        $data_inicio = '2018-08-01';
+        $data_fim = '2018-08-31';
+    } else if ($competencia[1] == '10') {
+        $data_inicio = '2018-10-01';
+        $data_fim = '2018-10-31';
+    }
+ }
+
 
 $dashboard->__set('data_inicio', $data_inicio );
 $dashboard->__set('data_fim', $data_fim);
@@ -296,6 +320,7 @@ $dashboard->__set('nome_clientes_inativos', $bd->getNomeClienteInativo());
 $dashboard->__set('dados_reclamacoes', $bd->getUserReclamacoes());
 $dashboard->__set('dados_elogios', $bd->getUserElogios());
 $dashboard->__set('dados_sugestoes', $bd->getUserSugestoes());
+$dashboard->__set('individual_vendas', $bd->getIndividualVendas());
 
 echo json_encode($dashboard);
 
