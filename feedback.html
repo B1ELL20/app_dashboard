@@ -1,7 +1,7 @@
 <div class="container mb-5">
     <div class="row-mb-5">
         <div class="col-6">
-            <h1>FEEDBAC</h1>
+            <h1>Feedback</h1>
         </div>
     </div>
 </div>
@@ -15,6 +15,12 @@
                 </div>
                 <div class="card-body">
                     <h5 class="card-title" id="totalReclamacoes"></h5>
+                    <button id="detalharR" class="btn btn-primary mb-3">Detalhar</button>
+                    <div id="detalhesR">
+                        <ul class="list-group">
+
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -25,6 +31,12 @@
                 </div>
                 <div class="card-body">
                     <h5 class="card-title" id="totalElogios"></h5>
+                    <button id="detalharE" class="btn btn-primary mb-3">Detalhar</button>
+                    <div id="detalhesE">
+                        <ul class="list-group">
+
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -35,8 +47,29 @@
                 </div>
                 <div class="card-body">
                     <h5 class="card-title" id="totalSugestoes"></h5>
+                    <button id="detalharS" class="btn btn-primary mb-3">Detalhar</button>
+                    <div id="detalhesS">
+                        <ul class="list-group">
+
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    $('#detalhesR').hide()
+    $('#detalhesE').hide()
+    $('#detalhesS').hide()
+    $('#detalharR').on('click', () =>{  
+        $('#detalhesR').slideToggle()
+    })
+    $('#detalharE').on('click', () =>{  
+        $('#detalhesE').slideToggle()
+    })
+    $('#detalharS').on('click', () =>{  
+        $('#detalhesS').slideToggle()
+    })
+</script>

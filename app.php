@@ -17,6 +17,8 @@ class Dashboard {
     public $nome_clientes_ativos;
     public $nome_clientes_inativos;
     public $dados_reclamacoes;
+    public $dados_elogios;
+    public $dados_sugestoes;
 
     public function __get($name) {
         return $this->$name;
@@ -180,6 +182,36 @@ class Bd {
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
+    public function getUserElogios() {
+        $query = '
+            select
+                contato, email
+            from
+                tb_contatos
+            where
+                tipo_contato = 2';
+
+        $stmt = $this->conexao->prepare($query);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    public function getUserSugestoes() {
+        $query = '
+            select
+                contato, email
+            from
+                tb_contatos
+            where
+                tipo_contato = 3';
+
+        $stmt = $this->conexao->prepare($query);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
     public function getElogios() {
         $query = '
             select
@@ -262,6 +294,8 @@ $dashboard->__set('total_despesas', $bd->getDespesas());
 $dashboard->__set('nome_clientes_ativos', $bd->getNomeClienteAtivo());
 $dashboard->__set('nome_clientes_inativos', $bd->getNomeClienteInativo());
 $dashboard->__set('dados_reclamacoes', $bd->getUserReclamacoes());
+$dashboard->__set('dados_elogios', $bd->getUserElogios());
+$dashboard->__set('dados_sugestoes', $bd->getUserSugestoes());
 
 echo json_encode($dashboard);
 

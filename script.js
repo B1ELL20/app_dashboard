@@ -18,11 +18,30 @@ $(document).ready(() => {
                 $('#totalElogios').html(dados.total_elogios)
                 $('#totalSugestoes').html(dados.total_sugestoes)
                 $('#totalReclamacoes').html(dados.total_reclamacoes)
-                console.log(dados.dados_reclamacoes)
+                dados.dados_reclamacoes.forEach(element => {
+                    $('#detalhesR ul').append(`<li class="list-group-item">
+                        <h5>${element.email}</h5>
+                        <p>${element.contato}</p>
+                    </li>`)
+                });
+                dados.dados_elogios.forEach(element => {
+                    $('#detalhesE ul').append(`<li class="list-group-item">
+                        <h5>${element.email}</h5>
+                        <p>${element.contato}</p>
+                    </li>`)
+                });
+                dados.dados_sugestoes.forEach(element => {
+                    $('#detalhesS ul').append(`<li class="list-group-item">
+                        <h5>${element.email}</h5>
+                        <p>${element.contato}</p>
+                    </li>`)
+                });
+                console.log(dados.dados_reclamacoes[0])
                },
            error: erro => { console.log(erro)}
         })
     })
+
     $('#clientes').on('click', () => {
         $('#pagina').load('clientes.html')
         $.ajax( {
@@ -42,6 +61,10 @@ $(document).ready(() => {
                },
            error: erro => { console.log(erro)}
         })
+    })
+
+    $('#conta').on('click', () => {
+        $('#pagina').load('conta.html')
     })
 
     $('#competencia').on('change', e => {
