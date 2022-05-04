@@ -4,6 +4,9 @@ body {
     background-color: #ebedef;
 }
 
+.btnM {
+  border-radius: 10px 10px 0px 0px;
+}
 .main {
     margin-left: 220px;
     padding: 15px;

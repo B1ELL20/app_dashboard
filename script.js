@@ -117,6 +117,19 @@ $(document).ready(() => {
         }
     });
 
+    var ctx3 = document.getElementById('chartRelacao').getContext('2d');
+
+    var chartGraph3 = new Chart(ctx3, {
+        type: 'doughnut',
+        data: {
+            datasets: [{
+                data: [],
+                backgroundColor: ['green', 'red']
+            }],
+            labels: ['Lucros', 'Gastos']
+        }
+    });
+
     $('#competencia').on('change', e => {
         
         let competencia = $(e.target).val()
@@ -124,6 +137,7 @@ $(document).ready(() => {
         let lista2 = []
         let lista3 = []
         let lista4 = []
+        let lista5 = []
 
         $.ajax({
             type: 'GET',
@@ -156,6 +170,11 @@ $(document).ready(() => {
                 chartGraph2.data.datasets[0].data = totais2
                 chartGraph2.data.labels = datas2
                 chartGraph2.update()
+
+                lista5 = [dados.total_vendas, dados.total_despesas]
+
+                chartGraph3.data.datasets[0].data = lista5
+                chartGraph3.update() 
                 
                  $('#numeroVendas').html(dados.numero_vendas)
                  $('#totalVendas').html(dados.total_vendas)

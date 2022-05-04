@@ -9,28 +9,50 @@
 
 <div class="row mb-3 display-flex justify-content-around">
     <div class="col-md-5">
-        <div class="card">
+        <div class="card mb-3">
             <div class="card-header">
                 <h4><strong>Clientes ativos</strong></h4>
             </div>
             <div class="card-body" id="ativos">
                  <h5 class="card-title" id="clientesAtivos">Total: </h5>
                  <hr>
-                 <ul class="list-group" ></ul>
+                 <button class="btn btn-primary" id="buttonM1">Mostrar</button>
+                 <div id="clientesA">
+                     <ul class="list-group" ></ul>
+                 </div>
             </div>
         </div>
     </div>
 
     <div class="col-md-5">
-        <div class="card">
+        <div class="card mb-3">
             <div class="card-header">
                 <h4><strong>Clientes inativos</strong></h4>
             </div>
             <div class="card-body" id="inativos">
                  <h5 class="card-title" id="clientesInativos">Total: </h5>
                  <hr>
-                 <ul class="list-group"></ul>
+                 <button class="btn btn-primary" id="buttonM2">Mostrar</button>
+                 <div id="clientesI">
+                     <ul class="list-group"></ul>
+                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    $('#clientesA').hide()
+    $('#clientesI').hide()
+
+    $('#buttonM1').click(() =>{
+        $('#clientesA').slideToggle()
+        $('#buttonM1').addClass('btnM')
+    })
+
+    $('#buttonM2').click(function() {
+        $('#clientesI').slideToggle()
+        $('#buttonM2').addClass('btnM')
+    })
+
+</script>

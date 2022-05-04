@@ -83,22 +83,27 @@
 		    		</div>
 		    	</div>
 		    	
-		    	<div class="row mb-3">
-		    		<div class="col-md-2">
-		    			<div class="card">
-							<div class="card-header bg-primary">
-								<h3>N° de vendas</h3>
+		    	<div class="row mb-3 d-flex flex-wrap">
+		    		<div class="col-lg-2">
+		    			<div>
+							<div class="card mb-3">
+								<div class="card-header bg-primary">
+									<h3>N° de vendas</h3>
+								</div>
+								<div class="card-body">
+									<i class="fa-solid h4 fa-sack-dollar"></i>
+									<h5 class="d-inline card-title" >Total: </h5>
+									<h5 class="d-inline" id="numeroVendas"></h5>
+								</div>
 							</div>
-							<div class="card-body">
-								<i class="fa-solid h4 fa-sack-dollar"></i>
-								<h5 class="d-inline card-title" >Total: </h5>
-								<h5 class="d-inline" id="numeroVendas"></h5>
+							<div class="mt-5 mb-5">
+								<canvas id="chartRelacao"></canvas>
 							</div>
 						</div>
 					</div>
 
-					<div class="col-md-5">
-		    			<div class="card">
+					<div class="col-lg-5">
+		    			<div class="card mb-3">
 							<div class="card-header bg-success">
 								<h1>Total de vendas</h1>
 							</div>
@@ -112,8 +117,8 @@
 							</div>
 						</div>
 		    		</div>
-					<div class="col-md-5">
-		    			<div class="card">
+					<div class="col-lg-5">
+		    			<div class="card mb-3">
 							<div class="card-header bg-danger">
 								<h1>Total de despesas</h1>
 							</div>
